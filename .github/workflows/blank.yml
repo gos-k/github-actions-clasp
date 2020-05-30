@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:20.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,3 +31,11 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+    - name Build Clasp
+      run: |
+        apt update
+        apt install -y gcc g++ llvm clang-6.0 libclang-6.0-dev cmake libgc-dev libgmp-dev binutils-gold binutils-dev zlib1g-dev libncurses-dev libboost-filesystem-dev libboost-regex-dev libboost-date-time-dev libboost-program-options-dev libboost-system-dev libboost-iostreams-dev libunwind-dev liblzma-dev libelf1 libelf-dev libbsd-dev sbcl git
+        git clone https://github.com/clasp-developers/clasp.git
+        cd clasp
+        git checkout f0cb8960867be6ed58a82066abb0da2df9da72b3
+        time ./waf configure build_dboehm
